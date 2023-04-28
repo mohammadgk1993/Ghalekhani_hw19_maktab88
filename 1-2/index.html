@@ -6,8 +6,9 @@
 </head>
     <body>
         <div id="menu-bar">
+            <button id="delete-all">Delete All tasks</button>
             <div id="search-bar">
-                <input type="text" placeholder="search">
+                <input id="search-text" type="text" placeholder="search">
                 <button id="search-button">search</button>
             </div>
         </div>
@@ -17,25 +18,34 @@
             <tbody></tbody>
         </table>
 
-        <form id="add-task">
-            <caption>add new task</caption>
-            <label for="task-title" for="">title</label>
-            <input id="task-title" type="text">
-            <label for="task-description" for="">description</label>
-            <input id="task-description" type="text">
-            <button type="submit">Add Task</button>
-        </form>
-
-        <form id="update-task">
-            <caption>update task</caption>
-            <label for="update-task-id">id</label>
-            <input id="update-task-id" type="text" disabled>
-            <label for="update-task-title" for="">title</label>
-            <input id="update-task-title" type="text">
-            <label for="update-task-description" for="">description</label>
-            <input id="update-task-description" type="text">
-            <button type="submit">Update Task</button>
-        </form>
+        <div id="crud">
+            <form id="add-task">
+                <caption>add new task</caption>
+                <label for="task-title" for="">title</label>
+                <input id="task-title" type="text">
+                <label for="task-description" for="">description</label>
+                <input id="task-description" type="text">
+                <button type="submit">Add Task</button>
+            </form>
+    
+            <form id="update-task">
+                <caption>update task</caption>
+                <label for="update-task-id">id</label>
+                <input id="update-task-id" type="text" disabled>
+                <label for="update-task-title" for="">title</label>
+                <input id="update-task-title" type="text">
+                <label for="update-task-description" for="">description</label>
+                <input id="update-task-description" type="text">
+                <button type="submit">Update Task</button>
+            </form>
+    
+            <form id="delete-task">
+                <caption>delete task</caption>
+                <label for="delete-task-id">id</label>
+                <input id="delete-task-id" type="text">
+                <button type="submit">delete Task</button>
+            </form>
+        </div>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="app.js"></script>

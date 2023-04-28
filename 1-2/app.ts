@@ -30,7 +30,8 @@ class TodoList {
     }
 
     public deleteAllTask(): void {
-        this.localStorage.clear()
+        this.tasks = []
+        this.localStorage.data = this.tasks
     }
 
     public getSingleTask(taskIndex:number) {
@@ -95,6 +96,12 @@ $(() => {
     $('tr').on("click", taskInfo); 
 
     $("#update-task").on("submit", updateTask)
+
+    $("#delete-task").on("submit", deleteTask)
+
+    $("#search-button").on("click", search)
+
+    $("#delete-all").on("click", deleteAllTasks)
 })
 
 
@@ -141,4 +148,39 @@ function taskInfo() {
     $("#update-task-id").val(id)
     $("#update-task-title").val(task.title)
     $("#update-task-description").val(task.description)
+}
+
+function deleteTask() {
+    todoList.removeTask(Number($("#delete-task-id").val()))
+    tableRenderer()
+}
+
+function search() {
+    let searchedItems = []
+    for (let task of todoList.alltasks) {
+        if (task.title.includes($("#search-text").val().toString()) ||
+        task.description.includes($("#search-text").val().toString())) {
+            searchedItems.push(task)
+        }
+    }
+
+    $("table thead").empty()
+    $("table tbody").empty()
+
+    $("table thead").append("<tr></tr>")
+    for (let key of Object.keys(searchedItems[0])) {
+        $("table thead tr").append(`<th>${key}</th>`)
+    }
+
+    for (let item of searchedItems) {
+        $("table tbody").append("<tr></tr>")
+        for (let val of Object.values(item)) {
+            $("table tbody tr:last").append(`<td>${val}</td>`)
+        }
+    }
+}
+
+function deleteAllTasks() {
+    todoList.deleteAllTask()
+    tableRenderer()
 }

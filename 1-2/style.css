@@ -2,6 +2,11 @@
     font-size: 20px;
 }
 
+#crud {
+    display: flex;
+    flex-direction: row;
+}
+
 #menu-bar {
     display: flex;
     flex-direction: row;
@@ -12,7 +17,7 @@
     border-radius: 5px;
 }
 
-#cruds,#search-bar {
+#search-bar {
     display: flex;
     flex-direction: row;
     border: none;
@@ -33,7 +38,7 @@ button {
     border-radius: 5px;
 }
 
-#add-task,#update-task {
+#add-task,#update-task,#delete-task {
     margin: 2%;
     display: flex;
     flex-direction: column;

@@ -23,7 +23,8 @@ var TodoList = /** @class */ (function () {
         configurable: true
     });
     TodoList.prototype.deleteAllTask = function () {
-        this.localStorage.clear();
+        this.tasks = [];
+        this.localStorage.data = this.tasks;
     };
     TodoList.prototype.getSingleTask = function (taskIndex) {
         return this.tasks[taskIndex];
@@ -76,6 +77,9 @@ $(function () {
     $("#add-task").on("submit", addTask);
     $('tr').on("click", taskInfo);
     $("#update-task").on("submit", updateTask);
+    $("#delete-task").on("submit", deleteTask);
+    $("#search-button").on("click", search);
+    $("#delete-all").on("click", deleteAllTasks);
 });
 function tableRenderer() {
     $("table thead").empty();
@@ -114,4 +118,37 @@ function taskInfo() {
     $("#update-task-id").val(id);
     $("#update-task-title").val(task.title);
     $("#update-task-description").val(task.description);
+}
+function deleteTask() {
+    todoList.removeTask(Number($("#delete-task-id").val()));
+    tableRenderer();
+}
+function search() {
+    var searchedItems = [];
+    for (var _i = 0, _a = todoList.alltasks; _i < _a.length; _i++) {
+        var task = _a[_i];
+        if (task.title.includes($("#search-text").val().toString()) ||
+            task.description.includes($("#search-text").val().toString())) {
+            searchedItems.push(task);
+        }
+    }
+    $("table thead").empty();
+    $("table tbody").empty();
+    $("table thead").append("<tr></tr>");
+    for (var _b = 0, _c = Object.keys(searchedItems[0]); _b < _c.length; _b++) {
+        var key = _c[_b];
+        $("table thead tr").append("<th>".concat(key, "</th>"));
+    }
+    for (var _d = 0, searchedItems_1 = searchedItems; _d < searchedItems_1.length; _d++) {
+        var item = searchedItems_1[_d];
+        $("table tbody").append("<tr></tr>");
+        for (var _e = 0, _f = Object.values(item); _e < _f.length; _e++) {
+            var val = _f[_e];
+            $("table tbody tr:last").append("<td>".concat(val, "</td>"));
+        }
+    }
+}
+function deleteAllTasks() {
+    todoList.deleteAllTask();
+    tableRenderer();
 }
